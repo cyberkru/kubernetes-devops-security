@@ -1,7 +1,7 @@
 pipeline {
   agent any
   environment {
-  	sonar_token = credentials('sonar_token')
+  	sonar_token = credentials('SONAR_TOKEN')
   }
 
   stages {
@@ -14,17 +14,10 @@ pipeline {
 
        stage('Sonarqube Scan') {
        		steps {
-       			script{
-       				def scannerhome = tool 'SonarQube';
-       				withSonarQubeEnv('SonarQubeServer'){
-       					sh "${tool("SonarQube")}/bin/sonar-scanner \
-       					-Dsonar.projectKey=kubernetes-devops-numeric \
-       					-Dsonar.sources=. \
-       					-Dsonar.css.node=. \
-       					-Dsonar.host.url=http://192.168.1.17:9000/ \
-       					-Dsonar.login=$sonar_token"
-       				}
-       			}
+       			sh "mvn sonar:sonar \
+  				-Dsonar.projectKey=kubernetes-devops-numeric \
+  				-Dsonar.host.url=http://192.168.1.17:9000 \
+  				-Dsonar.login=$sonar_token"
        		}
        }
 
