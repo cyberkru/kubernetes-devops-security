@@ -14,7 +14,7 @@ pipeline {
 
        stage('Sonarqube SAST') {
        		steps {
-       			sh "mvn clean verify sonar:sonar \
+       			sh "mvn clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar \
   				-Dsonar.projectKey=kubernetes-devops-numeric \
   				-Dsonar.host.url=http://192.168.1.17:9000 \
   				-Dsonar.login=$sonar_token"
