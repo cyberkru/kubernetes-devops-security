@@ -1,4 +1,10 @@
 fileignoreconfig:
 - filename: file-password.txt
   checksum: 0f2fd41522742f60d44c226657827a66ec3ae24ba30f279195288265629e915a
+- filename: file-password.txt
+  checksum: 0f2fd41522742f60d44c226657827a66ec3ae24ba30f279195288265629e915a
+- filename: file-base64.txt
+  checksum: a4d4ca8dfd15762975719e9a3866eaf8c40a60d11b72b1b28819cf4564102710
+- filename: file-secret.txt
+  checksum: 127e39087b80f422af0d8fa76388777cdb43aa8bc3ac9a235114b1be979b6d9b
 version: ""
