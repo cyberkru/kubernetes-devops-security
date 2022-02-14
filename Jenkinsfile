@@ -5,16 +5,16 @@ pipeline {
   }
 
   stages {
-      stage('Build Artifact') {
-            steps {
-              sh "mvn clean package -DskipTests=true"
-              archive 'target/*.jar' 
-            }
-        } 
+      // stage('Build Artifact') {
+      //       steps {
+      //         sh "mvn clean package -DskipTests=true"
+      //         archive 'target/*.jar' 
+      //       }
+      //   } 
 
-       stage('Sonarqube Scan') {
+       stage('Sonarqube SAST') {
        		steps {
-       			sh "mvn sonar:sonar \
+       			sh "mvn clean verify sonar:sonar \
   				-Dsonar.projectKey=kubernetes-devops-numeric \
   				-Dsonar.host.url=http://192.168.1.17:9000 \
   				-Dsonar.login=$sonar_token"
