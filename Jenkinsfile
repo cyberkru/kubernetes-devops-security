@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  environment {
+  	sonar_token = credentials('sonar_token')
+  }
 
   stages {
       stage('Build Artifact') {
