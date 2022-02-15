@@ -14,10 +14,18 @@ pipeline {
 
        stage('Sonarqube SAST') {
        		steps {
-       			sh "mvn clean verify sonar:sonar \
-  				-Dsonar.projectKey=kubernetes-devops-numeric \
-  				-Dsonar.host.url=http://192.168.1.23:9000 \
-  				-Dsonar.login=$sonar_token"
+       			withSonarQubeEnv('SonarQube') {
+       				sh "mvn clean verify sonar:sonar \
+	  				-Dsonar.projectKey=kubernetes-devops-numeric \
+	  				-Dsonar.host.url=http://192.168.1.23:9000 \
+	  				-Dsonar.login=$sonar_token"
+       			}
+       			timeout(time: 2, unit: 'MINUTES') {
+		          script {
+		            waitForQualityGate abortPipeline: true
+		          }
+		        }
+       			
        		}
        }
 
